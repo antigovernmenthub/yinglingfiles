@@ -217,55 +217,33 @@
       font-variant-numeric: tabular-nums;
     }
 
-    .card-corner {
-      position: absolute;
-      inset: auto 10px 10px auto;
-      width: 12px;
-      height: 12px;
-      border-radius: 3px;
-      background: linear-gradient(135deg, #e5f0ff, #fef9c3);
-      border: 1px solid #e5e7eb;
-    }
-
     footer {
-      margin-top: 12px;
+      margin-top: 16px;
+      font-size: 11px;
+      color: var(--text-muted);
     }
 
-    .ag-footer {
+    .ag-footer-line {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #111827, #1f2937);
-      color: #f9fafb;
-      font-size: 11px;
+      gap: 8px;
     }
 
-    .ag-flag {
-      width: 20px;
-      height: 14px;
-      border-radius: 3px;
-      background: linear-gradient(
-        to right,
-        #111827 0%,
-        #111827 33%,
-        #fbbf24 33%,
-        #fbbf24 66%,
-        #2563eb 66%,
-        #2563eb 100%
-      );
-      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.5);
+    .ag-footer-line img {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      object-fit: cover;
     }
 
-    .ag-footer a {
-      color: #e5e7eb;
+    .ag-footer-line a {
+      color: #2563eb;
       text-decoration: none;
       font-weight: 500;
     }
 
-    .ag-footer a:hover {
+    .ag-footer-line a:hover {
       text-decoration: underline;
     }
 
@@ -419,7 +397,7 @@
     <div class="divider"></div>
 
     <section class="grid">
-      <!-- Folder 01: wired to summer-camp.html -->
+      <!-- Folder 01: Summer Camp -->
       <a class="card" href="summer-camp.html">
         <div class="card-tag">folder.01</div>
         <div class="card-name">Summer Camp 2025</div>
@@ -427,10 +405,9 @@
           <span class="card-pill">photos</span>
           <span class="card-count">50 items</span>
         </div>
-        <div class="card-corner"></div>
       </a>
 
-      <!-- Folder 02: Screenshots (placeholder for now) -->
+      <!-- Folder 02: Screenshots -->
       <a class="card" href="#">
         <div class="card-tag">folder.02</div>
         <div class="card-name">Screenshots</div>
@@ -438,13 +415,32 @@
           <span class="card-pill">mixed</span>
           <span class="card-count">0 items</span>
         </div>
-        <div class="card-corner"></div>
+      </a>
+
+      <!-- Folder 03: Docs & PDFs -->
+      <a class="card" href="#">
+        <div class="card-tag">folder.03</div>
+        <div class="card-name">Docs &amp; PDFs</div>
+        <div class="card-meta">
+          <span class="card-pill">pdf</span>
+          <span class="card-count">0 items</span>
+        </div>
+      </a>
+
+      <!-- Folder 04: Notes & Logs -->
+      <a class="card" href="#">
+        <div class="card-tag">folder.04</div>
+        <div class="card-name">Notes &amp; Logs</div>
+        <div class="card-meta">
+          <span class="card-pill">text</span>
+          <span class="card-count">0 items</span>
+        </div>
       </a>
     </section>
 
     <footer>
-      <div class="ag-footer">
-        <div class="ag-flag"></div>
+      <div class="ag-footer-line">
+        <img src="logo.png" alt="AntiGovernment logo">
         <span>documented and compiled by <a href="https://antigovernmenthub.github.io/" target="_blank" rel="noopener noreferrer">AntiGovernment</a></span>
       </div>
     </footer>
