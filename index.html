@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Yingling Files</title>
+  <title>Yingling Archive</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -205,6 +205,11 @@
       transform: translateY(-2px);
     }
 
+    .card:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+    }
+
     .card-tag {
       font-size: 10px;
       letter-spacing: 0.16em;
@@ -268,6 +273,79 @@
       text-decoration: underline;
     }
 
+    /* Full-page gate overlay with countdown */
+    #gate-overlay {
+      position: fixed;
+      inset: 0;
+      background: #f9fafb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 5000;
+    }
+
+    .gate-inner {
+      background: #ffffff;
+      border-radius: 18px;
+      border: 1px solid #e5e7eb;
+      padding: 24px 32px 20px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow:
+        0 18px 40px rgba(15, 23, 42, 0.10),
+        0 0 0 1px rgba(255, 255, 255, 0.9);
+    }
+
+    .gate-title {
+      font-size: 18px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .gate-subtitle {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin-bottom: 16px;
+    }
+
+    .gate-countdown {
+      font-size: 20px;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.12em;
+      margin-bottom: 6px;
+    }
+
+    .gate-note {
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 14px;
+    }
+
+    .gate-admin {
+      font-size: 10px;
+      color: #9ca3af;
+      margin-top: 4px;
+    }
+
+    .gate-admin input {
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      padding: 4px 8px;
+      font-size: 10px;
+      outline: none;
+      width: 130px;
+      text-align: center;
+      margin-left: 4px;
+    }
+
+    .gate-admin input:focus {
+      border-color: rgba(37, 99, 235, 0.5);
+    }
+
     @media (max-width: 800px) {
       .shell {
         padding: 18px 16px 20px;
@@ -292,17 +370,38 @@
       .grid {
         grid-template-columns: repeat(2, minmax(120px, 1fr));
       }
+      .gate-inner {
+        padding: 18px 16px 16px;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Countdown overlay gate -->
+  <div id="gate-overlay">
+    <div class="gate-inner">
+      <div class="gate-title">Yingling Archive</div>
+      <div class="gate-subtitle">Access scheduled</div>
+
+      <div class="gate-countdown" id="gate-countdown">Calculating…</div>
+      <div class="gate-note">
+        Files will become available automatically when this countdown completes.
+      </div>
+
+      <div class="gate-admin">
+        Admin override:
+        <input type="password" id="gate-password" placeholder="enter key">
+      </div>
+    </div>
+  </div>
+
   <main class="shell">
     <div class="top-row">
       <div class="brand">
-        <div class="brand-mark">YF</div>
+        <div class="brand-mark">YA</div>
         <div class="brand-text">
           <h1>Yingling Archive</h1>
-          <p>archive</p>
+          <p>file archive</p>
         </div>
       </div>
       <div class="chip">
@@ -315,7 +414,7 @@
       <div class="intro-main">
         <h2>Structured storage.</h2>
         <p>
-          This archive is a compact file cabinet for photos, screenshots, documents, and notes.
+          Yingling Archive is a compact file cabinet for photos, screenshots, documents, and notes.
           Each folder groups related material so that content is easy to browse, reference, and
           expand over time.
         </p>
@@ -459,9 +558,69 @@
     </section>
 
     <footer>
-      <span>AntiGovernment · Yingling Files</span>
-      <span><a href="https://antigovernmenthub.github.io/index.html/files.html">AntiGovernment</a></span>
+      <span>Yingling Archive · file archive</span>
+      <span><a href="https://antigovernmenthub.github.io/yinglingfiles/">/yinglingfiles</a></span>
     </footer>
   </main>
+
+  <script>
+    // === Countdown target: 1 week from first load at 20:00 (8 PM) ===
+    (function () {
+      const gateOverlay = document.getElementById("gate-overlay");
+      const gateCountdownEl = document.getElementById("gate-countdown");
+      const gatePasswordInput = document.getElementById("gate-password");
+
+      // Compute target: one week (7 days) from now, at 20:00 local time
+      const now = new Date();
+      const target = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+      target.setHours(20, 0, 0, 0); // 20:00
+
+      const gateTargetTime = target.getTime();
+
+      function updateGateCountdown() {
+        const current = Date.now();
+        const distance = gateTargetTime - current;
+
+        if (!gateOverlay || !gateCountdownEl) return;
+
+        if (distance <= 0) {
+          gateOverlay.style.display = "none";
+          return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((distance / (1000 * 60)) % 60);
+        const seconds = Math.floor((distance / 1000) % 60);
+
+        const pad = (n) => (n < 10 ? "0" + n : "" + n);
+
+        gateCountdownEl.textContent =
+          pad(days) + "d " +
+          pad(hours) + "h " +
+          pad(minutes) + "m " +
+          pad(seconds) + "s";
+      }
+
+      updateGateCountdown();
+      setInterval(updateGateCountdown, 1000);
+
+      // Admin override with password
+      const ADMIN_PASSWORD = "password1";
+
+      if (gatePasswordInput && gateOverlay) {
+        gatePasswordInput.addEventListener("keydown", function (e) {
+          if (e.key === "Enter") {
+            if (gatePasswordInput.value === ADMIN_PASSWORD) {
+              gateOverlay.style.display = "none";
+            } else {
+              gatePasswordInput.value = "";
+              gatePasswordInput.placeholder = "incorrect";
+            }
+          }
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
