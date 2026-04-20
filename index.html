@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Yingling Archive</title>
+  <title>Yingling Files</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -81,7 +81,7 @@
     }
 
     .brand-text h1 {
-      font-size: 18px;
+      font-size: 24px; /* larger title font */
       letter-spacing: 0.16em;
       text-transform: uppercase;
     }
@@ -94,26 +94,13 @@
       margin-top: 2px;
     }
 
-    .chip {
-      font-size: 11px;
-      padding: 5px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(37, 99, 235, 0.18);
-      background: linear-gradient(120deg, #eff6ff, #fefce8);
-      color: #1d4ed8;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
+    .brand-text a {
+      color: #2563eb;
+      text-decoration: none;
     }
 
-    .chip-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: var(--accent-yellow);
+    .brand-text a:hover {
+      text-decoration: underline;
     }
 
     .intro {
@@ -159,23 +146,9 @@
       );
     }
 
-    .grid-label {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      color: var(--text-muted);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    .grid-label span:last-child {
-      color: #9ca3af;
-    }
-
     .grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(140px, 1fr));
+      grid-template-columns: repeat(2, minmax(200px, 1fr));
       gap: 10px;
     }
 
@@ -255,22 +228,74 @@
     }
 
     footer {
+      margin-top: 12px;
+    }
+
+    .ag-footer {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       gap: 10px;
-      font-size: 10px;
-      color: var(--text-muted);
-      margin-top: 4px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #111827, #1f2937);
+      color: #f9fafb;
+      font-size: 11px;
     }
 
-    footer a {
-      color: #2563eb;
+    .ag-flag {
+      width: 20px;
+      height: 14px;
+      border-radius: 3px;
+      background: linear-gradient(
+        to right,
+        #111827 0%,
+        #111827 33%,
+        #fbbf24 33%,
+        #fbbf24 66%,
+        #2563eb 66%,
+        #2563eb 100%
+      );
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.5);
+    }
+
+    .ag-footer a {
+      color: #e5e7eb;
       text-decoration: none;
+      font-weight: 500;
     }
 
-    footer a:hover {
+    .ag-footer a:hover {
       text-decoration: underline;
+    }
+
+    @media (max-width: 800px) {
+      .shell {
+        padding: 18px 16px 20px;
+      }
+      .intro {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+      }
+      .intro-meta {
+        justify-self: start;
+        text-align: left;
+      }
+      .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 12px;
+      }
+      .grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .gate-inner {
+        padding: 18px 16px 16px;
+      }
     }
 
     /* Full-page gate overlay with countdown */
@@ -345,42 +370,13 @@
     .gate-admin input:focus {
       border-color: rgba(37, 99, 235, 0.5);
     }
-
-    @media (max-width: 800px) {
-      .shell {
-        padding: 18px 16px 20px;
-      }
-      .intro {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 10px;
-      }
-      .intro-meta {
-        justify-self: start;
-        text-align: left;
-      }
-      .grid {
-        grid-template-columns: repeat(2, minmax(140px, 1fr));
-      }
-    }
-
-    @media (max-width: 480px) {
-      body {
-        padding: 12px;
-      }
-      .grid {
-        grid-template-columns: repeat(2, minmax(120px, 1fr));
-      }
-      .gate-inner {
-        padding: 18px 16px 16px;
-      }
-    }
   </style>
 </head>
 <body>
   <!-- Countdown overlay gate -->
   <div id="gate-overlay">
     <div class="gate-inner">
-      <div class="gate-title">Yingling Archive</div>
+      <div class="gate-title">Yingling Files</div>
       <div class="gate-subtitle">Access scheduled</div>
 
       <div class="gate-countdown" id="gate-countdown">Calculating…</div>
@@ -398,39 +394,29 @@
   <main class="shell">
     <div class="top-row">
       <div class="brand">
-        <div class="brand-mark">YA</div>
+        <div class="brand-mark">YF</div>
         <div class="brand-text">
-          <h1>Yingling Archive</h1>
-          <p>file archive</p>
+          <h1>Yingling Files</h1>
+          <p><a href="https://antigovernmenthub.github.io/" target="_blank" rel="noopener noreferrer">AntiGovernment</a></p>
         </div>
-      </div>
-      <div class="chip">
-        <span class="chip-dot"></span>
-        <span>GitHub Pages · /yinglingfiles</span>
       </div>
     </div>
 
     <section class="intro">
       <div class="intro-main">
-        <h2>Structured storage.</h2>
+        <h2>Yingling Library</h2>
         <p>
-          Yingling Archive is a compact file cabinet for photos, screenshots, documents, and notes.
+          Yingling Files is a compact collection for photos, screenshots, documents, and notes.
           Each folder groups related material so that content is easy to browse, reference, and
           expand over time.
         </p>
       </div>
       <div class="intro-meta">
-        <div><strong>Scope:</strong> Private reference collection</div>
-        <div>Location: antigovernmenthub.github.io/yinglingfiles</div>
+        <div><strong>State:</strong> Active collection</div>
       </div>
     </section>
 
     <div class="divider"></div>
-
-    <div class="grid-label">
-      <span>Root · Yingling Archive</span>
-      <span>Folders</span>
-    </div>
 
     <section class="grid">
       <!-- Folder 01: wired to summer-camp.html -->
@@ -444,7 +430,7 @@
         <div class="card-corner"></div>
       </a>
 
-      <!-- The rest you can wire up later -->
+      <!-- Folder 02: Screenshots (placeholder for now) -->
       <a class="card" href="#">
         <div class="card-tag">folder.02</div>
         <div class="card-name">Screenshots</div>
@@ -454,112 +440,13 @@
         </div>
         <div class="card-corner"></div>
       </a>
-
-      <a class="card" href="#">
-        <div class="card-tag">folder.03</div>
-        <div class="card-name">Docs & PDFs</div>
-        <div class="card-meta">
-          <span class="card-pill">pdf</span>
-          <span class="card-count">0 items</span>
-        </div>
-        <div class="card-corner"></div>
-      </a>
-
-      <a class="card" href="#">
-        <div class="card-tag">folder.04</div>
-        <div class="card-name">Notes & Logs</div>
-        <div class="card-meta">
-          <span class="card-pill">text</span>
-          <span class="card-count">0 items</span>
-        </div>
-        <div class="card-corner"></div>
-      </a>
-
-      <!-- Remaining spare folders -->
-      <a class="card" href="#">
-        <div class="card-tag">folder.05</div>
-        <div class="card-name">Spare</div>
-        <div class="card-meta">
-          <span class="card-pill">empty</span>
-          <span class="card-count">—</span>
-        </div>
-        <div class="card-corner"></div>
-      </a>
-
-      <a class="card" href="#">
-        <div class="card-tag">folder.06</div>
-        <div class="card-name">Spare</div>
-        <div class="card-meta">
-          <span class="card-pill">empty</span>
-          <span class="card-count">—</span>
-        </div>
-        <div class="card-corner"></div>
-      </a>
-
-      <a class="card" href="#">
-        <div class="card-tag">folder.07</div>
-        <div class="card-name">Spare</div>
-        <div class="card-meta">
-          <span class="card-pill">empty</span>
-          <span class="card-count">—</span>
-        </div>
-        <div class="card-corner"></div>
-      </a>
-
-      <a class="card" href="#">
-        <div class="card-tag">folder.08</div>
-        <div class="card-name">Spare</div>
-        <div class="card-meta">
-          <span class="card-pill">empty</span>
-          <span class="card-count">—</span>
-        </div>
-        <div class="card-corner"></div>
-      </a>
-
-      <a class="card" href="#">
-        <div class="card-tag">folder.09</div>
-        <div class="card-name">Spare</div>
-        <div class="card-meta">
-          <span class="card-pill">empty</span>
-          <span class="card-count">—</span>
-        </div>
-        <div class="card-corner"></div>
-      </a>
-
-      <a class="card" href="#">
-        <div class="card-tag">folder.10</div>
-        <div class="card-name">Spare</div>
-        <div class="card-meta">
-          <span class="card-pill">empty</span>
-          <span class="card-count">—</span>
-        </div>
-        <div class="card-corner"></div>
-      </a>
-
-      <a class="card" href="#">
-        <div class="card-tag">folder.11</div>
-        <div class="card-name">Spare</div>
-        <div class="card-meta">
-          <span class="card-pill">empty</span>
-          <span class="card-count">—</span>
-        </div>
-        <div class="card-corner"></div>
-      </a>
-
-      <a class="card" href="#">
-        <div class="card-tag">folder.12</div>
-        <div class="card-name">Spare</div>
-        <div class="card-meta">
-          <span class="card-pill">empty</span>
-          <span class="card-count">—</span>
-        </div>
-        <div class="card-corner"></div>
-      </a>
     </section>
 
     <footer>
-      <span>Yingling Archive · file archive</span>
-      <span><a href="https://antigovernmenthub.github.io/yinglingfiles/">/yinglingfiles</a></span>
+      <div class="ag-footer">
+        <div class="ag-flag"></div>
+        <span>documented and compiled by <a href="https://antigovernmenthub.github.io/" target="_blank" rel="noopener noreferrer">AntiGovernment</a></span>
+      </div>
     </footer>
   </main>
 
