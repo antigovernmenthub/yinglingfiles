@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Yingling Files</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #f7f7fb;
+      --surface: #ffffff;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --accent-blue: #2563eb;
+      --accent-yellow: #fbbf24;
+      --border-subtle: #e5e7eb;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #f9fafb, var(--bg));
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 960px;
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow:
+        0 18px 40px rgba(15, 23, 42, 0.06),
+        0 0 0 1px rgba(255, 255, 255, 0.9);
+      padding: 22px 22px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 20% 20%, var(--accent-yellow), transparent 60%),
+        radial-gradient(circle at 80% 80%, var(--accent-blue), transparent 55%),
+        #f3f4ff;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: #111827;
+    }
+
+    .brand-text h1 {
+      font-size: 18px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .brand-text p {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .chip {
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(37, 99, 235, 0.18);
+      background: linear-gradient(120deg, #eff6ff, #fefce8);
+      color: #1d4ed8;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent-yellow);
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+    }
+
+    .intro-main h2 {
+      font-size: 22px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .intro-main p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      max-width: 40rem;
+    }
+
+    .intro-meta {
+      justify-self: end;
+      text-align: right;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .intro-meta strong {
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(148, 163, 184, 0.6),
+        transparent
+      );
+    }
+
+    .grid-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .grid-label span:last-child {
+      color: #9ca3af;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(140px, 1fr));
+      gap: 10px;
+    }
+
+    .card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 14px 12px 12px;
+      background: #f9fafb;
+      border-radius: var(--radius-md);
+      border: 1px solid #e5e7eb;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+    }
+
+    .card:hover {
+      background: #ffffff;
+      border-color: rgba(37, 99, 235, 0.22);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .card-tag {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .card-name {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: #9ca3af;
+      margin-top: 2px;
+    }
+
+    .card-pill {
+      font-size: 9px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .card-count {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .card-corner {
+      position: absolute;
+      inset: auto 10px 10px auto;
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      background: linear-gradient(135deg, #e5f0ff, #fef9c3);
+      border: 1px solid #e5e7eb;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    footer a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 800px) {
+      .shell {
+        padding: 18px 16px 20px;
+      }
+      .intro {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+      }
+      .intro-meta {
+        justify-self: start;
+        text-align: left;
+      }
+      .grid {
+        grid-template-columns: repeat(2, minmax(140px, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 12px;
+      }
+      .grid {
+        grid-template-columns: repeat(2, minmax(120px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="top-row">
+      <div class="brand">
+        <div class="brand-mark">YF</div>
+        <div class="brand-text">
+          <h1>Yingling Files</h1>
+          <p>personal archive</p>
+        </div>
+      </div>
+      <div class="chip">
+        <span class="chip-dot"></span>
+        <span>Local build · 2025–2026</span>
+      </div>
+    </div>
+
+    <section class="intro">
+      <div class="intro-main">
+        <h2>Folders, not chaos.</h2>
+        <p>
+          A quiet place to stash screenshots, camp photos, notes, and whatever else
+          doesn&apos;t fit anywhere else. Click a folder to open it; everything lives
+          offline first, web second.
+        </p>
+      </div>
+      <div class="intro-meta">
+        <div><strong>Status:</strong> Work in progress</div>
+        <div>Hosted on GitHub Pages</div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <div class="grid-label">
+      <span>Root · 12 folders</span>
+      <span>Last updated · Apr 2026</span>
+    </div>
+
+    <section class="grid">
+      <!-- Example folders — change href/name/meta as you fill them -->
+
+      <a class="card" href="summer-camp.html">
+        <div class="card-tag">folder.01</div>
+        <div class="card-name">Summer Camp 2025</div>
+        <div class="card-meta">
+          <span class="card-pill">photos</span>
+          <span class="card-count">50 items</span>
+        </div>
+        <div class="card-corner"></div>
+      </a>
+
+      <a class="card" href="#">
+        <div class="card-tag">folder.02</div>
+        <div class="card-name">Screenshots</div>
+        <div class="card-meta">
+          <span class="card-pill">mixed</span>
+          <span class="card-count">0 items</span>
+        </div>
+        <div class="card-corner"></div>
+      </a>
+
+      <a class="card" href="#">
+        <div class="card-tag">folder.03</div>
+        <div class="card-name">Docs & PDFs</div>
+        <div class="card-meta">
+          <span class="card-pill">pdf</span>
+          <span class="card-count">0 items</span>
+        </div>
+        <div class="card-corner"></div>
+      </a>
+
+      <a class="card" href="#">
+        <div class="card-tag">folder.04</div>
+        <div class="card-name">Notes & Logs</div>
+        <div class="card-meta">
+          <span class="card-pill">text</span>
+          <span class="card-count">0 items</span>
+        </div>
+        <div class="card-corner"></div>
+      </a>
+
+      <!-- Add more folders as needed; copy/paste card blocks -->
+
+      <a class="card" href="#">
+        <div class="card-tag">folder.05</div>
+        <div class="card-name">Spare</div>
+        <div class="card-meta">
+          <span class="card-pill">empty</span>
+          <span class="card-count">—</span>
+        </div>
+        <div class="card-corner"></div>
+      </a>
+
+      <a class="card" href="#">
+        <div class="card-tag">folder.06</div>
+        <div class="card-name">Spare</div>
+        <div class="card-meta">
+          <span class="card-pill">empty</span>
+          <span class="card-count">—</span>
+        </div>
+        <div class="card-corner"></div>
+      </a>
+
+      <a class="card" href="#">
+        <div class="card-tag">folder.07</div>
+        <div class="card-name">Spare</div>
+        <div class="card-meta">
+          <span class="card-pill">empty</span>
+          <span class="card-count">—</span>
+        </div>
+        <div class="card-corner"></div>
+      </a>
+
+      <a class="card" href="#">
+        <div class="card-tag">folder.08</div>
+        <div class="card-name">Spare</div>
+        <div class="card-meta">
+          <span class="card-pill">empty</span>
+          <span class="card-count">—</span>
+        </div>
+        <div class="card-corner"></div>
+      </a>
+
+      <a class="card" href="#">
+        <div class="card-tag">folder.09</div>
+        <div class="card-name">Spare</div>
+        <div class="card-meta">
+          <span class="card-pill">empty</span>
+          <span class="card-count">—</span>
+        </div>
+        <div class="card-corner"></div>
+      </a>
+
+      <a class="card" href="#">
+        <div class="card-tag">folder.10</div>
+        <div class="card-name">Spare</div>
+        <div class="card-meta">
+          <span class="card-pill">empty</span>
+          <span class="card-count">—</span>
+        </div>
+        <div class="card-corner"></div>
+      </a>
+
+      <a class="card" href="#">
+        <div class="card-tag">folder.11</div>
+        <div class="card-name">Spare</div>
+        <div class="card-meta">
+          <span class="card-pill">empty</span>
+          <span class="card-count">—</span>
+        </div>
+        <div class="card-corner"></div>
+      </a>
+
+      <a class="card" href="#">
+        <div class="card-tag">folder.12</div>
+        <div class="card-name">Spare</div>
+        <div class="card-meta">
+          <span class="card-pill">empty</span>
+          <span class="card-count">—</span>
+        </div>
+        <div class="card-corner"></div>
+      </a>
+    </section>
+
+    <footer>
+      <span>Yingling Files · static archive</span>
+      <span>Built with plain HTML/CSS</span>
+    </footer>
+  </main>
+</body>
+</html>
